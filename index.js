@@ -35,7 +35,7 @@ app.post('/authenticate', function (req, res) {
     if(req.body.username && req.body.password) {
 	authenticate(req.body.username, req.body.password)
 	    .then(function(user) {
-		var expires = moment().add(2, 'days').valueOf();
+		var expires = moment().add(2, 'days').format("X")
 		var token = jwt.encode({
 		    exp: expires,
 		    user_name: user.uid,
@@ -92,7 +92,7 @@ app.post('/verify', function (req, res) {
 
 app.post('/add', function (req, res) {
     if (req.body) {
-	lldap.add(req.body, res);
+      lldap.add(req.body, res);
     }
 });
 
